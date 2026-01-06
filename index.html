@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .presentation-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            background: #ffffff;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        /* Slide from left transitions */
+        .slide.slide-left {
+            transform: translateX(-100%);
+            opacity: 1;
+            transition: transform 0.8s ease-out;
+        }
+
+        .slide.slide-left.active {
+            transform: translateX(0);
+        }
+
+        /* Fade out transitions */
+        .slide.fade-out-previous {
+            opacity: 1;
+            transition: opacity 0.8s ease-out;
+        }
+
+        .slide.fade-out-previous.hiding {
+            opacity: 0;
+        }
+
+        /* Fade in from white */
+        .slide.fade-from-white {
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
+        }
+
+        .slide.fade-from-white.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* White fade overlay for transition effect */
+        .fade-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 100;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .fade-overlay.active {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .slide img {
+                max-width: 95%;
+                max-height: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container" id="presentation">
+        <div class="slide active" data-index="0">
+            <img src="img01.svg" alt="Slide 1">
+        </div>
+        <div class="slide fade-out-previous" data-index="1">
+            <img src="img02.svg" alt="Slide 2">
+        </div>
+        <div class="slide slide-left" data-index="2">
+            <img src="img03.svg" alt="Slide 3">
+        </div>
+        <div class="slide" data-index="3">
+            <img src="img04.svg" alt="Slide 4">
+        </div>
+        <div class="slide" data-index="4">
+            <img src="img05.svg" alt="Slide 5">
+        </div>
+        <div class="slide" data-index="5">
+            <img src="img06.svg" alt="Slide 6">
+        </div>
+        <div class="slide" data-index="6">
+            <img src="img07.svg" alt="Slide 7">
+        </div>
+        <div class="slide fade-out-previous" data-index="7">
+            <img src="img08.svg" alt="Slide 8">
+        </div>
+        <div class="slide slide-left" data-index="8">
+            <img src="img09.svg" alt="Slide 9">
+        </div>
+        <div class="slide fade-out-previous" data-index="9">
+            <img src="img10.svg" alt="Slide 10">
+        </div>
+        <div class="slide slide-left" data-index="10">
+            <img src="img11.svg" alt="Slide 11">
+        </div>
+        <div class="slide" data-index="11">
+            <img src="img12.svg" alt="Slide 12">
+        </div>
+        <div class="slide" data-index="12">
+            <img src="img13.svg" alt="Slide 13">
+        </div>
+        <div class="slide" data-index="13">
+            <img src="img14.svg" alt="Slide 14">
+        </div>
+        <div class="slide fade-out-previous" data-index="14">
+            <img src="img15.svg" alt="Slide 15">
+        </div>
+        <div class="slide" data-index="15">
+            <img src="img16.svg" alt="Slide 16">
+        </div>
+        <div class="slide" data-index="16">
+            <img src="img17.svg" alt="Slide 17">
+        </div>
+        <div class="slide" data-index="17">
+            <img src="img18.svg" alt="Slide 18">
+        </div>
+        <div class="slide fade-from-white" data-index="18">
+            <img src="img19.svg" alt="Slide 19">
+        </div>
+    </div>
+
+    <div class="fade-overlay" id="fadeOverlay"></div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const fadeOverlay = document.getElementById('fadeOverlay');
+        let isTransitioning = false;
+
+        function showSlide(index) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            const previousSlide = slides[currentSlide];
+            const nextSlide = slides[index];
+
+            // Check if previous slide has fade-out transition
+            if (previousSlide.classList.contains('fade-out-previous')) {
+                // Fade out the current slide
+                previousSlide.classList.add('hiding');
+                
+                setTimeout(() => {
+                    previousSlide.classList.remove('active', 'hiding');
+                    nextSlide.classList.add('active');
+                    isTransitioning = false;
+                }, 800);
+            } 
+            // Check if next slide has slide-left transition
+            else if (nextSlide.classList.contains('slide-left')) {
+                // Remove previous slide immediately
+                previousSlide.classList.remove('active');
+                // Add active to trigger slide-in
+                nextSlide.classList.add('active');
+                
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 800);
+            }
+            // Check if next slide has fade-from-white transition
+            else if (nextSlide.classList.contains('fade-from-white')) {
+                // Remove previous slide immediately
+                previousSlide.classList.remove('active');
+                // Add active to trigger fade-in
+                nextSlide.classList.add('active');
+                
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 800);
+            }
+            // No transition - instant switch
+            else {
+                previousSlide.classList.remove('active');
+                nextSlide.classList.add('active');
+                isTransitioning = false;
+            }
+        }
+
+        function nextSlide() {
+            if (isTransitioning) return;
+            const newSlide = (currentSlide + 1) % slides.length;
+            showSlide(newSlide);
+            currentSlide = newSlide;
+        }
+
+        function previousSlide() {
+            if (isTransitioning) return;
+            const newSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(newSlide);
+            currentSlide = newSlide;
+        }
+
+        // Click anywhere to advance
+        document.getElementById('presentation').addEventListener('click', nextSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+    </script>
+</body>
+</html>
