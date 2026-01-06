@@ -47,37 +47,6 @@
             z-index: 10;
         }
 
-        /* Slide from left transitions */
-        .slide.slide-left {
-            transform: translateX(-100%);
-            opacity: 1;
-            transition: transform 0.8s ease-out;
-        }
-
-        .slide.slide-left.active {
-            transform: translateX(0);
-        }
-
-        /* Fade out transitions */
-        .slide.fade-out-previous {
-            opacity: 1;
-            transition: opacity 0.8s ease-out;
-        }
-
-        .slide.fade-out-previous.hiding {
-            opacity: 0;
-        }
-
-        /* Fade in from white */
-        .slide.fade-from-white {
-            opacity: 0;
-            transition: opacity 0.8s ease-in;
-        }
-
-        .slide.fade-from-white.active {
-            opacity: 1;
-        }
-
         .slide img {
             max-width: 90%;
             max-height: 90%;
@@ -86,7 +55,23 @@
             object-fit: contain;
         }
 
-        /* White fade overlay for transition effect */
+        /* Slide from left transition */
+        .slide.slide-from-left {
+            transform: translateX(-100%);
+            opacity: 1;
+        }
+
+        .slide.slide-from-left.active {
+            transform: translateX(0);
+            transition: transform 0.8s ease-out;
+        }
+
+        .slide.slide-from-left.resetting {
+            transform: translateX(-100%);
+            transition: none;
+        }
+
+        /* White fade overlay for fade-out transitions */
         .fade-overlay {
             position: fixed;
             top: 0;
@@ -97,7 +82,7 @@
             opacity: 0;
             pointer-events: none;
             z-index: 100;
-            transition: opacity 0.4s ease-in-out;
+            transition: opacity 0.6s ease-in-out;
         }
 
         .fade-overlay.active {
@@ -114,61 +99,103 @@
 </head>
 <body>
     <div class="presentation-container" id="presentation">
-        <div class="slide active" data-index="0">
+        <!-- Slide 0: img00 - Start -->
+        <div class="slide active" data-transition="fade-out">
+            <img src="img00.svg" alt="Slide 0">
+        </div>
+        
+        <!-- Slide 1: img01 - Slide in from left -->
+        <div class="slide slide-from-left" data-transition="instant">
             <img src="img01.svg" alt="Slide 1">
         </div>
-        <div class="slide fade-out-previous" data-index="1">
+        
+        <!-- Slide 2: img02 - Display -->
+        <div class="slide" data-transition="fade-out">
             <img src="img02.svg" alt="Slide 2">
         </div>
-        <div class="slide slide-left" data-index="2">
+        
+        <!-- Slide 3: img03 - Slide in from left -->
+        <div class="slide slide-from-left" data-transition="instant">
             <img src="img03.svg" alt="Slide 3">
         </div>
-        <div class="slide" data-index="3">
+        
+        <!-- Slide 4: img04 - Display -->
+        <div class="slide" data-transition="instant">
             <img src="img04.svg" alt="Slide 4">
         </div>
-        <div class="slide" data-index="4">
+        
+        <!-- Slide 5: img05 - Display -->
+        <div class="slide" data-transition="instant">
             <img src="img05.svg" alt="Slide 5">
         </div>
-        <div class="slide" data-index="5">
+        
+        <!-- Slide 6: img06 - Display -->
+        <div class="slide" data-transition="instant">
             <img src="img06.svg" alt="Slide 6">
         </div>
-        <div class="slide" data-index="6">
+        
+        <!-- Slide 7: img07 - Display -->
+        <div class="slide" data-transition="instant">
             <img src="img07.svg" alt="Slide 7">
         </div>
-        <div class="slide fade-out-previous" data-index="7">
+        
+        <!-- Slide 8: img08 - Display -->
+        <div class="slide" data-transition="fade-out">
             <img src="img08.svg" alt="Slide 8">
         </div>
-        <div class="slide slide-left" data-index="8">
+        
+        <!-- Slide 9: img09 - Slide in from left -->
+        <div class="slide slide-from-left" data-transition="instant">
             <img src="img09.svg" alt="Slide 9">
         </div>
-        <div class="slide fade-out-previous" data-index="9">
+        
+        <!-- Slide 10: img10 - Display -->
+        <div class="slide" data-transition="fade-out">
             <img src="img10.svg" alt="Slide 10">
         </div>
-        <div class="slide slide-left" data-index="10">
+        
+        <!-- Slide 11: img11 - Slide in from left -->
+        <div class="slide slide-from-left" data-transition="instant">
             <img src="img11.svg" alt="Slide 11">
         </div>
-        <div class="slide" data-index="11">
+        
+        <!-- Slide 12: img12 - Display -->
+        <div class="slide" data-transition="instant">
             <img src="img12.svg" alt="Slide 12">
         </div>
-        <div class="slide" data-index="12">
+        
+        <!-- Slide 13: img13 - Display -->
+        <div class="slide" data-transition="instant">
             <img src="img13.svg" alt="Slide 13">
         </div>
-        <div class="slide" data-index="13">
+        
+        <!-- Slide 14: img14 - Display -->
+        <div class="slide" data-transition="instant">
             <img src="img14.svg" alt="Slide 14">
         </div>
-        <div class="slide fade-out-previous" data-index="14">
+        
+        <!-- Slide 15: img15 - Display -->
+        <div class="slide" data-transition="fade-out">
             <img src="img15.svg" alt="Slide 15">
         </div>
-        <div class="slide" data-index="15">
+        
+        <!-- Slide 16: img16 - Display -->
+        <div class="slide" data-transition="instant">
             <img src="img16.svg" alt="Slide 16">
         </div>
-        <div class="slide" data-index="16">
+        
+        <!-- Slide 17: img17 - Display -->
+        <div class="slide" data-transition="instant">
             <img src="img17.svg" alt="Slide 17">
         </div>
-        <div class="slide" data-index="17">
+        
+        <!-- Slide 18: img18 - Display -->
+        <div class="slide" data-transition="instant">
             <img src="img18.svg" alt="Slide 18">
         </div>
-        <div class="slide fade-from-white" data-index="18">
+        
+        <!-- Slide 19: img19 - Display -->
+        <div class="slide" data-transition="fade-out">
             <img src="img19.svg" alt="Slide 19">
         </div>
     </div>
@@ -181,66 +208,74 @@
         const fadeOverlay = document.getElementById('fadeOverlay');
         let isTransitioning = false;
 
-        function showSlide(index) {
+        function showSlide(newIndex) {
             if (isTransitioning) return;
             isTransitioning = true;
 
-            const previousSlide = slides[currentSlide];
-            const nextSlide = slides[index];
+            const currentSlideElement = slides[currentSlide];
+            const nextSlideElement = slides[newIndex];
+            const transitionType = currentSlideElement.getAttribute('data-transition');
 
-            // Check if previous slide has fade-out transition
-            if (previousSlide.classList.contains('fade-out-previous')) {
-                // Fade out the current slide
-                previousSlide.classList.add('hiding');
+            // Handle transition based on CURRENT slide's exit transition
+            if (transitionType === 'fade-out') {
+                // Fade out to white
+                fadeOverlay.classList.add('active');
                 
                 setTimeout(() => {
-                    previousSlide.classList.remove('active', 'hiding');
-                    nextSlide.classList.add('active');
-                    isTransitioning = false;
-                }, 800);
-            } 
-            // Check if next slide has slide-left transition
-            else if (nextSlide.classList.contains('slide-left')) {
-                // Remove previous slide immediately
-                previousSlide.classList.remove('active');
-                // Add active to trigger slide-in
-                nextSlide.classList.add('active');
+                    currentSlideElement.classList.remove('active');
+                    
+                    // Reset slide-from-left slides to starting position
+                    if (nextSlideElement.classList.contains('slide-from-left')) {
+                        nextSlideElement.classList.add('resetting');
+                        // Force reflow
+                        nextSlideElement.offsetHeight;
+                        nextSlideElement.classList.remove('resetting');
+                    }
+                    
+                    nextSlideElement.classList.add('active');
+                    
+                    setTimeout(() => {
+                        fadeOverlay.classList.remove('active');
+                        currentSlide = newIndex;
+                        isTransitioning = false;
+                    }, 600);
+                }, 600);
+            } else {
+                // Instant transition (no fade)
+                currentSlideElement.classList.remove('active');
                 
-                setTimeout(() => {
-                    isTransitioning = false;
-                }, 800);
-            }
-            // Check if next slide has fade-from-white transition
-            else if (nextSlide.classList.contains('fade-from-white')) {
-                // Remove previous slide immediately
-                previousSlide.classList.remove('active');
-                // Add active to trigger fade-in
-                nextSlide.classList.add('active');
+                // Reset slide-from-left slides to starting position
+                if (nextSlideElement.classList.contains('slide-from-left')) {
+                    nextSlideElement.classList.add('resetting');
+                    // Force reflow
+                    nextSlideElement.offsetHeight;
+                    nextSlideElement.classList.remove('resetting');
+                }
                 
-                setTimeout(() => {
+                nextSlideElement.classList.add('active');
+                currentSlide = newIndex;
+                
+                // Wait for slide-from-left animation if applicable
+                if (nextSlideElement.classList.contains('slide-from-left')) {
+                    setTimeout(() => {
+                        isTransitioning = false;
+                    }, 800);
+                } else {
                     isTransitioning = false;
-                }, 800);
-            }
-            // No transition - instant switch
-            else {
-                previousSlide.classList.remove('active');
-                nextSlide.classList.add('active');
-                isTransitioning = false;
+                }
             }
         }
 
         function nextSlide() {
             if (isTransitioning) return;
-            const newSlide = (currentSlide + 1) % slides.length;
-            showSlide(newSlide);
-            currentSlide = newSlide;
+            const newIndex = (currentSlide + 1) % slides.length;
+            showSlide(newIndex);
         }
 
         function previousSlide() {
             if (isTransitioning) return;
-            const newSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(newSlide);
-            currentSlide = newSlide;
+            const newIndex = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(newIndex);
         }
 
         // Click anywhere to advance
